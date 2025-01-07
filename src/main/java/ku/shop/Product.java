@@ -11,7 +11,7 @@ public class Product {
         this.stock = stock;
     }
 
-    public void cutStock(int quantity) {
+    public void cutStock(int quantity) throws NotEnoughProductException {
         stock -= quantity;
     }
 
