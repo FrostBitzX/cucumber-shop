@@ -10,6 +10,7 @@ public class BuyStepdefs {
 
     private ProductCatalog catalog;
     private Order order;
+    private Exception exception;
 
     @Given("the store is ready to service customers")
     public void the_store_is_ready_to_service_customers() {
@@ -24,8 +25,18 @@ public class BuyStepdefs {
 
     @When("I buy {string} with quantity {int}")
     public void i_buy_with_quantity(String name, int quantity) {
-        Product prod = catalog.getProduct(name);
-        order.addItem(prod, quantity);
+        try{
+            Product prod = catalog.getProduct(name);
+            order.addItem(prod, quantity);
+        } catch (NotEnoughProductException e){
+            exception = e;
+        }
+
+    }
+
+    @Then("Error invalid quantity")
+    public void error_invalid_quantity() {
+        assertInstanceOf(NotEnoughProductException.class, exception);
     }
 
     @Then("total should be {float}")

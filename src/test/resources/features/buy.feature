@@ -18,6 +18,6 @@ Scenario: Buy multiple products
     And I buy "Butter" with quantity 1
     Then total should be 141.00
 
-Scenario: Buy products more than stock
+Scenario: Buy products more than available stock
     When I buy "Bread" with quantity 10
-    Then Not enough stock
+    Then Error invalid quantity

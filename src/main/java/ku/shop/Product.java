@@ -12,6 +12,9 @@ public class Product {
     }
 
     public void cutStock(int quantity) throws NotEnoughProductException {
+        if (quantity > stock){
+            throw  new NotEnoughProductException("Quantity exceeds stock");
+        }
         stock -= quantity;
     }
 
